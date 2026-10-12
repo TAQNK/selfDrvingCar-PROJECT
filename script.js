@@ -9,6 +9,45 @@ function addRandomPoint() {
   graph.draw(ctx);
   console.log(success);
 }
+// adding random segment
+function addRandomSegement() {
+  const index1 = Math.floor(Math.random() * graph.points.length);
+  const index2 = Math.floor(Math.random() * graph.points.length);
+  const p1 = graph.points[index1];
+  const p2 = graph.points[index2];
+  const success = graph.tryAddSegment(new Segment(p1, p2)) ? true : false;
+  ctx.clearRect(0, 0, canvas2D.width, canvas2D.height);
+  graph.draw(ctx);
+  console.log(success);
+}
+// remove segment
+function removeRandomSegement() {
+  if (graph.segments.length == 0) {
+    console.log("no segment to remove");
+    return;
+  }
+  const index = Math.floor(Math.random() * graph.segments.length);
+  graph.removeSegment(graph.segments[index]);
+  ctx.clearRect(0, 0, canvas2D.width, canvas2D.height);
+  graph.draw(ctx);
+}
+// remove random point
+function removeRandomPoint() {
+  if (graph.points.length == 0) {
+    console.log("no point to remove");
+    return;
+  }
+  const index = Math.floor(Math.random() * graph.points.length);
+  graph.removePoint(graph.points[index]);
+  ctx.clearRect(0, 0, canvas2D.width, canvas2D.height);
+  graph.draw(ctx);
+}
+//  remove all
+function removeAll() {
+  graph.dispose();
+  ctx.clearRect(0, 0, canvas2D.width, canvas2D.height);
+  graph.draw(ctx);
+}
 // graph
 const ctx = canvas2D.getContext("2d");
 
