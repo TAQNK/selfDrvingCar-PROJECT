@@ -16,14 +16,20 @@ const s4 = new Segment(p2, p3);
 
 const graph = new Graph([p1, p2, p3, p4], [s1, s2, s3, s4]);
 
+// defining the bird's eye viewport
+const viewport = new Viewport(canvas2D);
 // a graph editor that will load the graph and will have the interaction 
 // animation formed based on your cursor values
-const graphEditor = new GraphEditor(canvas2D , graph);
+const graphEditor = new GraphEditor(viewport , graph);
 
 animate();
 
 function animate(){
     ctx.clearRect(0 , 0 , canvas2D.width , canvas2D.height);
+    // save the canvas
+    ctx.save();
+    ctx.scale(1 / viewport.zoom , 1/viewport.zoom);
     graphEditor.display();
+    ctx.restore();
     requestAnimationFrame(animate);//recursive call 
 }
